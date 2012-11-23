@@ -13,8 +13,11 @@ passing the account information in the options hash.  Thus, either of these two 
 
 ``` ruby
 BnetScraper::Starcraft2::ProfileScraper.new(url: 'http://us.battle.net/sc2/en/profile/12345/1/TestAccount/')
-BnetScraper::Starcraft2::ProfileScraper.new(bnet_id: '12345', account: 'TestAccount', region: 'na')
+BnetScraper::Starcraft2::ProfileScraper.new(bnet_id: '12345', account: 'TestAccount', gateway: 'us')
 ```
+
+Note that the latter will assume subregion "1", which is North America. Make sure you're also passing the correct subregion along,
+if you want to scrape a profile in a different subregion. For a full mapping of regions, see `BnetScraper::Starcraft2::REGIONS`
 
 There are several scrapers that pull various information.  They are:
 
@@ -25,6 +28,14 @@ There are several scrapers that pull various information.  They are:
 
 All scrapers have a `#scrape` method that triggers the scraping and storage.  By default they will return the result,
 but an additional `#output` method exists to retrieve the results subsequent times without re-scraping.
+
+## Terminology
+
+To clarify some of the confusion that might result from changing terminology and no general consensus, BnetScraper now uses naming relative to the battle.net URL scheme to avoid confusion, especially regarding "subregion" and "gateway":
+
+`<gateway>.battle.net/sc2/<locale>/profile/<bnet_id>/<subregion>/<name>`
+
+Note that "region" is not in there - it is the freely named key for a combination of gateway and subregion, it does not appear on battle.net anywhere.
 
 ## BnetScraper::Starcraft2::ProfileScraper
 

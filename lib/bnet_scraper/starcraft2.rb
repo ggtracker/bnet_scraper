@@ -11,20 +11,28 @@ module BnetScraper
   # for more details
   module Starcraft2
     REGIONS = {
-      'na'  => { domain: 'us.battle.net', dir: 'en', label: 'North America' },
-      'eu'  => { domain: 'eu.battle.net', dir: 'en', label: 'Europe' },
-      'cn'  => { domain: 'www.battlenet.com.cn', dir: 'zh', label: 'China' },
-      'sea' => { domain: 'sea.battle.net', dir: 'en', label: 'South-East Asia' },
-      'fea' => { domain: 'tw.battle.net', dir: 'zh', label: 'Korea' }
+      'na'  => { gateway: 'us',  subregion: 1, locale: 'en', label: 'North America' },
+      'la'  => { gateway: 'us',  subregion: 2, locale: 'en', label: 'Latin America' },
+      'eu'  => { gateway: 'eu',  subregion: 1, locale: 'en', label: 'Europe' },
+      'ru'  => { gateway: 'eu',  subregion: 2, locale: 'en', label: 'Russia' },
+      'cn'  => { gateway: 'cn',  subregion: 1, locale: 'zh', label: 'China' },
+      'sea' => { gateway: 'sea', subregion: 1, locale: 'en', label: 'South-East Asia' },
+      'tw'  => { gateway: 'tw',  subregion: 1, locale: 'zh', label: 'Taiwan' },
+      'kr'  => { gateway: 'kr',  subregion: 1, locale: 'ko', label: 'Korea' },
+      # There's a subregion 2 for korea and I honestly don't know what the name of that would be
+      'kr2' => { gateway: 'kr',  subregion: 2, locale: 'ko', label: 'Also Korea' }
     }
 
-    REGION_DOMAINS = {
-      'us.battle.net' => 'na',
+    # Gateway Hostname Mapping
+    # This exists primarily because china does things differently from everyone else.
+    HOSTNAMES = {
+      'us.battle.net' => 'us',
       'eu.battle.net' => 'eu',
       'www.battlenet.com.cn' => 'cn',
+      'cn.battle.net' => 'cn',
       'sea.battle.net' => 'sea',
-      'kr.battle.net' => 'fea',
-      'tw.battle.net' => 'fea'
+      'kr.battle.net' => 'kr',
+      'tw.battle.net' => 'tw'
     }
 
     # The armory uses spritemaps that are sequentially named and have a fixed
@@ -88,12 +96,12 @@ module BnetScraper
     # the parameters being sent to `#full_profile_scrape`.
     #
     # @param bnet_id - Battle.net Account ID 
-    # @param account - Battle.net Account Name
-    # @param region  - Battle.net Account Region
+    # @param name    - Battle.net Account Name
+    # @param gateway - Battle.net Account Gateway
     # @return profile_data - Hash containing complete profile and league data
     #   scraped from the website
-    def self.full_profile_scrape bnet_id, account, region = 'na'
-      profile_scraper = ProfileScraper.new bnet_id: bnet_id, account: account, region: region
+    def self.full_profile_scrape bnet_id, name, gateway = 'us'
+      profile_scraper = ProfileScraper.new bnet_id: bnet_id, name: name, gateway: gateway
       profile_output  = profile_scraper.scrape
 
       parsed_leagues = []

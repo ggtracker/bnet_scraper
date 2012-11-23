@@ -14,7 +14,7 @@ describe BnetScraper::Starcraft2::BaseScraper do
 
   describe '#scrape' do
     it 'should raise an error calling scrape' do
-      expect { subject.scrape }.to raise_error NotImplementedError
+      expect { subject.scrape }.to raise_error BnetScraper::InvalidProfileError
     end
   end
 end

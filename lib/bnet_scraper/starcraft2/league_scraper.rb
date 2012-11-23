@@ -3,19 +3,19 @@ module BnetScraper
     # This pulls information on a specific league for a specific account.  It is best used either in conjunction with a
     # profile scrape that profiles a URL, or if you happen to know the specific league\_id and can pass it as an option.
     #
-    #  scraper = BnetScraper::Starcraft2::LeagueScraper.new(league_id: '12345', account: 'Demon', bnet_id: '2377239')
+    #  scraper = BnetScraper::Starcraft2::LeagueScraper.new(league_id: '12345', name: 'Demon', bnet_id: '2377239')
     #  scraper.scrape
     #  # => {
     #    season: '6',
-    #    name: 'Aleksander Pepper',
-    #    division: 'Diamond',
+    #    division: 'Aleksander Pepper',
+    #    league: 'Diamond',
     #    size: '4v4',
     #    random: false,
     #    bnet_id: '2377239',
-    #    account: 'Demon'
+    #    name: 'Demon'
     #  }
     class LeagueScraper < BaseScraper
-      attr_reader :league_id, :season, :size, :random, :name, :division
+      attr_reader :league_id, :season, :size, :random, :league, :division
 
       # @param [String] url - The league URL on battle.net
       # @return [Hash] league_data - Hash of data extracted
@@ -37,7 +37,7 @@ module BnetScraper
           header_regex = /Season (\d{1}) - \s+(\dv\d)( Random)? (\w+)\s+Division (.+)/
           header_values = value.match(header_regex).to_a
           header_values.shift()
-          @season, @size, @random, @division, @name = header_values
+          @season, @size, @random, @league, @division = header_values
           
           @random = !@random.nil?
           output
@@ -50,11 +50,11 @@ module BnetScraper
         {
           season: @season,
           size: @size,
-          name: @name,
           division: @division,
+          league: @league,
           random: @random,
           bnet_id: @bnet_id,
-          account: @account
+          name: @name
         }
       end
     end

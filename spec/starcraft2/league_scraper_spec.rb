@@ -23,15 +23,15 @@ describe BnetScraper::Starcraft2::LeagueScraper do
     end
 
     it 'should set the name' do
-      subject.name.should be_nil 
+      subject.division.should be_nil 
       subject.scrape
-      subject.name.should == 'Aleksander Pepper'
+      subject.division.should == 'Aleksander Pepper'
     end
 
     it 'should set the divison' do
-      subject.division.should be_nil
+      subject.league.should be_nil
       subject.scrape
-      subject.division.should == 'Diamond'
+      subject.league.should == 'Diamond'
     end
 
     it 'should set the size' do
@@ -62,12 +62,12 @@ describe BnetScraper::Starcraft2::LeagueScraper do
     it 'should return a hash of league data' do
       expected = {
         season: '6',
-        name: 'Aleksander Pepper',
-        division: 'Diamond',
+        division: 'Aleksander Pepper',
+        league: 'Diamond',
         size: '4v4',
         random: false,
         bnet_id: '2377239',
-        account: 'Demon'
+        name: 'Demon'
       }
 
       subject.scrape

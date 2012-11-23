@@ -7,8 +7,8 @@ module BnetScraper
     #   scraper.scrape
     #   # => {
     #     bnet_id: '2377239',
-    #     account: 'Demon',
-    #     bnet_index: 1,
+    #     name: 'Demon',
+    #     subregion: 1,
     #     race: 'Protoss',
     #     wins: '684',
     #     achievement_points: '3630',
@@ -117,8 +117,8 @@ module BnetScraper
       def output
          {
           bnet_id: @bnet_id,
-          account: @account,
-          bnet_index: @bnet_index,
+          name: @name,
+          subregion: @subregion,
           race: @race,
           current_solo_league: @current_solo_league,
           highest_solo_league: @highest_solo_league,

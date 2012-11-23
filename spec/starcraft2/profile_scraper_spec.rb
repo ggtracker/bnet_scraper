@@ -6,7 +6,7 @@ describe BnetScraper::Starcraft2::ProfileScraper do
     let(:subject) { scraper_class.new(url: 'http://us.battle.net/sc2/en/profile/2377239/1/Demon/') }
   end
 
-  subject { BnetScraper::Starcraft2::ProfileScraper.new(bnet_id: '2377239', account: 'Demon') }
+  subject { BnetScraper::Starcraft2::ProfileScraper.new(bnet_id: '2377239', name: 'Demon') }
 
   describe '#get_profile_data' do
     before do
@@ -69,7 +69,7 @@ describe BnetScraper::Starcraft2::ProfileScraper do
       expect { scraper.scrape }.to raise_error(BnetScraper::InvalidProfileError)
     end
 
-    context 'account that has not laddered' do
+    context 'name that has not laddered' do
       let(:scraper) {BnetScraper::Starcraft2::ProfileScraper.new(url: 'http://us.battle.net/sc2/en/profile/3354437/1/ClarkeKent/') }
       before do
         scraper.scrape
@@ -85,8 +85,8 @@ describe BnetScraper::Starcraft2::ProfileScraper do
     it 'should extract profile data from the response' do
       expected = {
         bnet_id: '2377239',
-        account: 'Demon',
-        bnet_index: 1,
+        name: 'Demon',
+        subregion: 1,
         race: 'Protoss',
         career_games: '1568',
         games_this_season: '0',
@@ -163,8 +163,8 @@ describe BnetScraper::Starcraft2::ProfileScraper do
 
       subject.output.should == { 
         bnet_id: '2377239', 
-        account: 'Demon',
-        bnet_index: 1,
+        name: 'Demon',
+        subregion: 1,
         race: nil,
         career_games: nil,
         games_this_season: nil,
