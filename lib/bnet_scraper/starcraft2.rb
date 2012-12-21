@@ -31,50 +31,39 @@ module BnetScraper
     # 6x6 grid. We'll simply use the portrait names, left to right, top to
     # bottom.
     #
-    # Note: I couldn't identify the exact names of some of these and instead of
-    # guessing, I didn't name them. Some appear in multiple files too, which 
-    # is odd.
+    # Some names found from http://starcraft.wikia.com/wiki/Portraits
     #
-    # I decided th pad the arrays even if there are no images to make various
-    # helping functionality (e.g. retrieving position for a name) easier.
-    # I've also kept them in 6x6 here for better overview.
+    # All the portraits must have unique names, so that someone who
+    # has only the name can reverse this list to get the portrait
+    # coordinates.
+    #
     PORTRAITS = [
       # http://eu.battle.net/sc2/static/local-common/images/sc2/portraits/0-75.jpg?v42
       ['Kachinsky', 'Cade', 'Thatcher', 'Hall', 'Tiger Marine', 'Panda Marine', 
       'General Warfield', 'Jim Raynor', 'Arcturus Mengsk', 'Sarah Kerrigan', 'Kate Lockwell', 'Rory Swann', 
       'Egon Stetmann', 'Hill', 'Adjutant', 'Dr. Ariel Hanson', 'Gabriel Tosh', 'Matt Horner', 
-      # Could not identify in order: Raynor in a Suit? Bullmarine? Nova? 
-      # Fiery Marine?
-      'Tychus Findlay', 'Zeratul', 'Valerian Mengsk', 'Spectre', '?', '?',
-      '?', '?', 'SCV', 'Firebat', 'Vulture', 'Hellion', 
+      'Tychus Findlay', 'Zeratul', 'Valerian Mengsk', 'Spectre', 'Jim Raynor Marine', 'Tauren Marine',
+      'Night Elf Banshee', 'Diablo Marine', 'SCV', 'Firebat', 'Vulture', 'Hellion', 
       'Medic', 'Spartan Company', 'Wraith', 'Diamondback', 'Probe', 'Scout'],
 
       # http://eu.battle.net/sc2/static/local-common/images/sc2/portraits/1-75.jpg?v42
-      # Special Rewards - couldn't identify most of these.
-      ['?', '?', '?', '?', '?', 'PanTerran Marine', 
-      '?', '?', '?', '?', '', '',
-      '', '', '', '', '', '',
-      '', '', '', '', '', '',
-      '', '', '', '', '', '',
-      '', '', '', '', '', ''],
+      ['Korea Tauren Marine', 'Korea Night Elf Banshee', 'Korea Diablo Marine', 'Korea Worgen Marine', 'Korea Goblin Marine', 'PanTerran Marine', 
+      'Wizard Templar', 'Tyrael Marine', 'Witch Doctor Zergling', 'Unknown1', 'Night Elf Templar', 'Infested Orc'] +
+      (2..25).collect{|x| "Unknown#{x}"},
 
       # http://eu.battle.net/sc2/static/local-common/images/sc2/portraits/2-75.jpg?v42
       ['Ghost', 'Thor', 'Battlecruiser', 'Nova', 'Zealot', 'Stalker', 
       'Phoenix', 'Immortal', 'Void Ray', 'Colossus', 'Carrier', 'Tassadar',
       'Reaper', 'Sentry', 'Overseer', 'Viking', 'High Templar', 'Mutalisk',
-      # Unidentified: Bird? Dog? Robot?
-      'Banshee', 'Hybrid Destroyer', 'Dark Voice', '?', '?', '?',
-      # Unidentified: Worgen? Goblin? Chef?
-      'Orian', 'Wolf Marine', 'Murloc Marine', '?', '?', 'Zealot Chef', 
-      # Unidentified: KISS Marine? Dragon Marine? Dragon? Another Raynor?
-      'Stank', 'Ornatus', '?', '?', '?', '?'],
+      'Banshee', 'Hybrid Destroyer', 'Dark Voice', 'Unknown26', 'Unknown27', 'Unknown28',
+      'Orian', 'Wolf Marine', 'Murloc Marine', 'Unknown29', 'Unknown30', 'Zealot Chef', 
+      'Stank', 'Ornatus', 'China Facebook Corps Members', 'China Lion Marines', 'China Dragons', 'Korea Raynor Marine'],
 
       # http://eu.battle.net/sc2/static/local-common/images/sc2/portraits/3-75.jpg?v42
       ['Urun', 'Nyon', 'Executor', 'Mohandar', 'Selendis', 'Artanis', 
       'Drone', 'Infested Colonist', 'Infested Marine', 'Corruptor', 'Aberration', 'Broodlord', 
       'Overmind', 'Leviathan', 'Overlord', 'Hydralisk Marine', "Zer'atai Dark Templar", 'Goliath', 
-      # Unidentified: Satan Marine?
-      'Lenassa Dark Templar', 'Mira Han', 'Archon', 'Hybrid Reaver', 'Predator', '?',
+      'Lenassa Dark Templar', 'Mira Han', 'Archon', 'Hybrid Reaver', 'Predator', 'Unknown29',
       'Zergling', 'Roach', 'Baneling', 'Hydralisk', 'Queen', 'Infestor', 
       'Ultralisk', 'Queen of Blades', 'Marine', 'Marauder', 'Medivac', 'Siege Tank']
     ]
