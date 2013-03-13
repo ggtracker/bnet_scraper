@@ -71,9 +71,13 @@ module BnetScraper
       ['Urun', 'Nyon', 'Executor', 'Mohandar', 'Selendis', 'Artanis', 
       'Drone', 'Infested Colonist', 'Infested Marine', 'Corruptor', 'Aberration', 'Broodlord', 
       'Overmind', 'Leviathan', 'Overlord', 'Hydralisk Marine', "Zer'atai Dark Templar", 'Goliath', 
-      'Lenassa Dark Templar', 'Mira Han', 'Archon', 'Hybrid Reaver', 'Predator', 'Unknown29',
+      'Lenassa Dark Templar', 'Mira Han', 'Archon', 'Hybrid Reaver', 'Predator', 'Unknown31',
       'Zergling', 'Roach', 'Baneling', 'Hydralisk', 'Queen', 'Infestor', 
-      'Ultralisk', 'Queen of Blades', 'Marine', 'Marauder', 'Medivac', 'Siege Tank']
+      'Ultralisk', 'Queen of Blades', 'Marine', 'Marauder', 'Medivac', 'Siege Tank'],
+
+      # http://media.blizzard.com/sc2/portraits/4-90.jpg
+      # level-based rewards, presumably
+      [(32..67).collect{|x| "Unknown#{x}"}]
     ]
 
     # This is a convenience method that chains calls to ProfileScraper,
