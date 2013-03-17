@@ -77,7 +77,7 @@ module BnetScraper
 
       # http://media.blizzard.com/sc2/portraits/4-90.jpg
       # level-based rewards, presumably
-      [(32..67).collect{|x| "Unknown#{x}"}]
+      (32..67).collect{|x| "Unknown#{x}"}
     ]
 
     # This is a convenience method that chains calls to ProfileScraper,
