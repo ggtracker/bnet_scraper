@@ -30,7 +30,8 @@ module BnetScraper
     class ProfileScraper < BaseScraper
       attr_reader :achievement_points, :career_games, :race, :leagues, :most_played,
         :games_this_season, :highest_solo_league, :current_solo_league, :highest_team_league,
-        :current_team_league, :portrait
+        :current_team_league, :portrait,
+        :career_zerg_wins, :career_protoss_wins, :career_terran_wins
 
       def initialize options = {}
         super
@@ -57,7 +58,7 @@ module BnetScraper
             portrait_map, portrait_size = portrait[0].scan(/(\d)\-(\d+)\.jpg/)[0]
             portrait_position = (((0-portrait[2].to_i) / portrait_size.to_i) * 6) + ((0-portrait[1].to_i) / portrait_size.to_i + 1)
             PORTRAITS[portrait_map.to_i][portrait_position-1]
-          rescue 
+          rescue
             nil
           end
 
@@ -66,6 +67,9 @@ module BnetScraper
           @career_games = html.css(".career-stat-block:nth-child(4) .stat-value").inner_html()
           @most_played = html.css(".stat-block:nth-child(2) h2").inner_html()
           @games_this_season = html.css(".career-stat-block:nth-child(5) .stat-value").inner_html()
+          @career_terran_wins = html.css(".career-stat-block:nth-child(1) .stat-value").inner_html()
+          @career_zerg_wins = html.css(".career-stat-block:nth-child(2) .stat-value").inner_html()
+          @career_protoss_wins = html.css(".career-stat-block:nth-child(3) .stat-value").inner_html()
 
           if html.css("#best-finish-SOLO div")[0]
             @highest_solo_league = html.css("#best-finish-SOLO div")[0].children[2].inner_text.strip
