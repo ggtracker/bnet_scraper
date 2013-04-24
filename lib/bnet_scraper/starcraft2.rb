@@ -21,6 +21,8 @@ module BnetScraper
       'kr'  => { gateway: 'kr',  subregion: 1, locale: 'ko', label: 'Korea' },
       # There's a subregion 2 for korea and I honestly don't know what the name of that would be
       'kr2' => { gateway: 'kr',  subregion: 2, locale: 'ko', label: 'Also Korea' }
+      # Also for taiwan
+      'tw2'  => { gateway: 'tw',  subregion: 2, locale: 'zh', label: 'Also Taiwan' },
     }
 
     # Gateway Hostname Mapping
