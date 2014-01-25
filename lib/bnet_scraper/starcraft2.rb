@@ -79,11 +79,11 @@ module BnetScraper
 
       # http://media.blizzard.com/sc2/portraits/4-90.jpg
       # level-based rewards, presumably
-      (32..67).collect{|x| "Unknown#{x}"}
+      (32..67).collect{|x| "Unknown#{x}"},
 
       # http://media.blizzard.com/sc2/portraits/5-90.jpg
       # level-based rewards, one would expect. such as very cute StarCrafts characters
-      (68..103).collect{|x| "Unknown#{x}"}
+      (68..103).collect{|x| "Unknown#{x}"},
 
       # future portrait space
       (104..139).collect{|x| "Unknown#{x}"}
